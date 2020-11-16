@@ -6,6 +6,6 @@
 
 # Stack
 
-    React, TailwindCSS, Parcel
+    NextJs, React, TailwindCSS
     Go gin with gorillaWebsocket, MongoDB, Postgresql(not determine)
     Nginx

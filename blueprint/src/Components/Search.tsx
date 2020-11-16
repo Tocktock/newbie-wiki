@@ -20,7 +20,7 @@ const Search: React.FC = (props) => {
           onChange={(e) => setQuery(e.target.value)}
         />
         <button className="text-gray-500 rounded-full border w-8 border-white absolute right-2 top-4">
-          <i className="fas fa-search"></i>
+          <i aria-hidden className="fas fa-search"></i>
         </button>
       </div>
       <div className="ds-dropdown-menu mt-2">

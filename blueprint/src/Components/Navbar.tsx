@@ -3,8 +3,8 @@ import Search from "./Search";
 import Menu from "./mixins/Menu";
 import Link from "next/link";
 interface Props {
-  mainState: boolean;
-  login: boolean;
+  mainState?: boolean;
+  login?: boolean;
 }
 
 const Navbar: React.FC<Props> = (props) => {
