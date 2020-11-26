@@ -1,5 +1,5 @@
-package main
+// package main
 
-func main() {
-	newbiewiki_docs.getHandler()
-}
+// func main() {
+// 	newbiwiki_docs.
+// }

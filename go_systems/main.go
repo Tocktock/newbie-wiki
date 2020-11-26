@@ -1,8 +1,8 @@
 package main
 
 import (
+	"task-manager/src/wiki_elastic"
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -28,40 +28,6 @@ type msg struct {
 	Data string `json:"data"`
 }
 
-func handleMongoAPI(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"message": "mongodb api~"})
-}
-func handleAPI(w http.ResponseWriter, r *http.Request) {
-
-	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
-
-	// connection
-	con, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println(err.Error())
-		return
-	}
-Loop:
-	for {
-		in := msg{}
-		err := con.ReadJSON(&in)
-		if err != nil {
-			fmt.Println("Error reading json.", err)
-			con.Close()
-			break Loop
-		}
-		switch in.Type {
-		case "for-test":
-			fmt.Println("Test success!!")
-			break
-		default:
-			fmt.Println(in)
-			break
-		}
-
-	}
-}
-
 var wg sync.WaitGroup
 var router *gin.Engine
 
@@ -75,6 +41,8 @@ func main() {
 func initServer() {
 	mongoConnectdone := make(chan interface{})
 	go newbiewiki_mongo.MongoConnect(mongoConnectdone)
+	elasticDone := make(chan interface{})
+	go wiki_elastic.ElasticConnect(elasticDone)
 	newbiewiki_docs.SetRouting(router)
 	//order is needed
 	go func() {
@@ -82,12 +50,13 @@ func initServer() {
 		for {
 			select {
 			case <-mongoConnectdone:
-				//SetInit must be called after mongoConnect
-				newbiewiki_docs.SetInit()
-				fmt.Println("newbiewiki_doc init finished")
+				count++
+			case <-elasticDone:
 				count++
 			}
-			if count == 1 {
+			if count == 2 {
+				newbiewiki_docs.SetInit()
+				log.Println("newbiewiki_doc init finished")
 				return
 			}
 		}

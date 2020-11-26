@@ -2,7 +2,6 @@ package newbiewiki_mongo
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -24,7 +23,7 @@ func MongoConnect(done chan interface{}) {
 	if err != nil {
 		log.Fatal("mongo connect failed :")
 	} else {
-		fmt.Println("mongo connected")
+		log.Println("mongo connected")
 	}
 	done <- struct{}{}
 }
