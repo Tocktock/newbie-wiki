@@ -7,13 +7,6 @@ import (
 	"github.com/elastic/go-elasticsearch/v8/esapi"
 	"time"
 	"log"
-	"fmt"
-	"net/http"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
-
-	"go.mongodb.org/mongo-driver/bson"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,27 +18,28 @@ func SetRouting(route *gin.Engine) {
 	{
 		v1.GET("/documents/:id", getHandler)
 		v1.POST("/documents/create", addHandler)
+		v1.PUT("/documents/:id", updateHandler)
 		v1.DELETE("/documents/:id", deleteHandler)
 	}
 }
 
 func getHandler(ctx *gin.Context) {
-	var data Wiki_docs
-	id, _ := primitive.ObjectIDFromHex(ctx.Param("id"))
-	err := read(ctx, bson.D{{"_id", id}}, &data)
-	if err != nil {
-		fmt.Println(err)
+	target := ctx.Param("id")
+
+	req := esapi.GetRequest{
+		Index : "documents",
+		DocumentID : target,
 	}
-	ctx.JSON(http.StatusOK, data)
+	wiki_elastic.Get(req)
 }
 func addHandler(ctx *gin.Context) {
-	
 	var data Wiki_docs
 	if err := ctx.BindJSON(&data); err!= nil {
 		log.Println(err)
 	}
-	data.TimeInfo.CreatedTime = time.Now().UTC()
-	data.TimeInfo.ModifiedTime = time.Now().UTC()
+	now := time.Now().UTC()
+	data.TimeInfo.CreatedTime = &now
+	data.TimeInfo.ModifiedTime = &now
 
 	jsonData := toJSON(data)
 
@@ -58,8 +52,27 @@ func addHandler(ctx *gin.Context) {
 	wiki_elastic.Insert(req)
 }
 
+//
 func updateHandler(ctx *gin.Context) {
-
+	target := ctx.Param("id")
+	var data struct {
+		Doc Wiki_docs `json:"doc"`
+	}
+	
+	if err := ctx.BindJSON(&data); err!= nil {
+		log.Println(err)
+	}
+	now := time.Now().UTC()
+	data.Doc.TimeInfo.ModifiedTime = &now
+	log.Println("bind data is : ",data)
+	jsonData := toJSON(data)
+	log.Println("json data is : ",jsonData)
+	req := esapi.UpdateRequest{
+		Index : "documents",
+		DocumentID : target,
+		Body : jsonData,
+	}
+	wiki_elastic.Update(req)
 }
 func deleteHandler(ctx *gin.Context) {
 	

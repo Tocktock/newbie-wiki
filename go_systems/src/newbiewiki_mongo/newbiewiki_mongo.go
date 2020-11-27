@@ -25,7 +25,7 @@ func MongoConnect(done chan interface{}) {
 	} else {
 		log.Println("mongo connected")
 	}
-	done <- struct{}{}
+	done <-struct{}{}
 }
 
 func GetCollection(db string, collection string) *mongo.Collection {

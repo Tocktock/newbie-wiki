@@ -17,7 +17,6 @@ var wordTable struct {
 //SetInit init mongodb collection
 func SetInit() {
 	_collection = newbiewiki_mongo.GetCollection("api", "wiki-docs")
-	//mapTable := make(map[string][]string)
 }
 
 // returns insertedid, err

@@ -54,9 +54,12 @@ func initServer() {
 			case <-elasticDone:
 				count++
 			}
+			log.Println(count)
 			if count == 2 {
 				newbiewiki_docs.SetInit()
 				log.Println("newbiewiki_doc init finished")
+				close(mongoConnectdone)
+				close(elasticDone)
 				return
 			}
 		}

@@ -15,7 +15,6 @@ var es *elasticsearch.Client
 
 //ElasticConnect is connection func to elasticsearch 
 func ElasticConnect(done chan interface{}) {
-	defer close(done)
 	var err error
 	es, err = elasticsearch.NewDefaultClient()
 	if err != nil {
@@ -23,6 +22,7 @@ func ElasticConnect(done chan interface{}) {
 	}else {
 		log.Println("elasticsearch connected")
 	}
+	done <- struct{}{}
 }
 
 //GetESClient return esclient
@@ -30,7 +30,16 @@ func GetESClient() *elasticsearch.Client {
 	return es
 }
 
-//Insert data into elasticsearch 
+//Get Data
+func Get(req esapi.GetRequest)  {
+	res, err := req.Do(context.Background(), es) 
+	if err!= nil {
+		log.Println(err)
+	}
+	defer res.Body.Close()
+	log.Println(res)
+}
+//Insert data 
 func Insert(req esapi.IndexRequest) {
 	res, err := req.Do(context.Background(), es) 
 	if err!= nil {
@@ -40,6 +49,15 @@ func Insert(req esapi.IndexRequest) {
 	log.Println(res)
 }
 
+//Update data in elasticsearch db
+func Update(req esapi.UpdateRequest)  {
+	res, err := req.Do(context.Background(), es)
+	if err != nil {
+		log.Println(err)
+	}
+	defer res.Body.Close()
+	log.Println(res)
+}
 // Delete data from elasticserch
 func Delete(req esapi.DeleteRequest)  {
 	res, err := req.Do(context.Background(), es)
