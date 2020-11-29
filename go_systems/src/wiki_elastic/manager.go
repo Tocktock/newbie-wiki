@@ -33,37 +33,52 @@ func GetESClient() *elasticsearch.Client {
 //Get Data
 func Get(req esapi.GetRequest)  {
 	res, err := req.Do(context.Background(), es) 
+	defer res.Body.Close()
 	if err!= nil {
 		log.Println(err)
+	} else {
+		log.Println(res)
 	}
-	defer res.Body.Close()
-	log.Println(res)
 }
 //Insert data 
 func Insert(req esapi.IndexRequest) {
 	res, err := req.Do(context.Background(), es) 
+	defer res.Body.Close()
 	if err!= nil {
 		log.Println(err)
+	} else {
+		log.Println(res)
 	}
-	defer res.Body.Close()
-	log.Println(res)
 }
 
 //Update data in elasticsearch db
 func Update(req esapi.UpdateRequest)  {
 	res, err := req.Do(context.Background(), es)
+	defer res.Body.Close()
 	if err != nil {
 		log.Println(err)
+	} else {
+		log.Println(res)
 	}
-	defer res.Body.Close()
-	log.Println(res)
 }
 // Delete data from elasticserch
 func Delete(req esapi.DeleteRequest)  {
 	res, err := req.Do(context.Background(), es)
+	defer res.Body.Close()
 	if err != nil {
 		log.Println(err)
+	} else {
+		log.Println(res)
 	}
-	defer res.Body.Close()
-	log.Println(res)
+}
+
+// Find data in elasticsearch it queries _search
+func Find(req esapi.SearchRequest) *esapi.Response {
+	res, err := req.Do(context.Background(), es)
+	if err != nil {
+		log.Println(err)
+	} else {
+		log.Println(res)
+	}
+	return res
 }

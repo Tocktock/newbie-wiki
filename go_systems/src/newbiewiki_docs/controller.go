@@ -16,10 +16,11 @@ func SetRouting(route *gin.Engine) {
 	r := route
 	v1 := r.Group("/api/v1")
 	{
-		v1.GET("/documents/:id", getHandler)
+		v1.GET("/documents/get/:id", getHandler)
 		v1.POST("/documents/create", addHandler)
 		v1.PUT("/documents/:id", updateHandler)
 		v1.DELETE("/documents/:id", deleteHandler)
+		v1.GET("/documents/search/:query",findHandler)
 	}
 }
 
@@ -86,6 +87,27 @@ func deleteHandler(ctx *gin.Context) {
 	wiki_elastic.Delete(req)
 }
 
+//title find, not contents
+func findHandler(ctx *gin.Context) {
+	//query find in contents
+	query := ctx.Param("query")
+	
+	var QueryRequest wiki_elastic.MatchQuery
+	QueryRequest.Query.Match.Title = query
+	jsonData := toJSON(QueryRequest)
+	req := esapi.SearchRequest{
+		Index : []string{"documents"},
+		Body : jsonData,
+	}
+	res := wiki_elastic.Find(req)
+	var resData wiki_elastic.HitsData
+	json.NewDecoder(res.Body).Decode(&resData)
+	ctx.JSON(200, resData.Hits["hits"])
+}
+
+type tstr struct {
+	Source interface{} `json:"_source"`
+}
 
 func toJSON(data interface{}) *strings.Reader {
 	myjson, err := json.Marshal(data)
