@@ -1,7 +1,7 @@
 package main
 
 import (
-	"task-manager/src/wiki_elastic"
+	nw_elastic "task-manager/src/newbiewiki_elastic"
 	"context"
 	"log"
 	"net/http"
@@ -42,7 +42,7 @@ func initServer() {
 	mongoConnectdone := make(chan interface{})
 	go newbiewiki_mongo.MongoConnect(mongoConnectdone)
 	elasticDone := make(chan interface{})
-	go wiki_elastic.ElasticConnect(elasticDone)
+	go nw_elastic.ElasticConnect(elasticDone)
 	newbiewiki_docs.SetRouting(router)
 	//order is needed
 	go func() {

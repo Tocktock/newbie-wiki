@@ -1,4 +1,4 @@
-package wiki_elastic
+package newbiewiki_elastic
 
 // //UpdateJSON is struct for updaterequest in elasitcsearch
 // type UpdateJSON struct{

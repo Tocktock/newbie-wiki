@@ -4,7 +4,6 @@ import Link from "next/link";
 const SignInPage = () => {
   return (
     <>
-      <NavBar mainState={false} login={false} />
       <SignIn />
     </>
   );

@@ -1,7 +1,7 @@
 package newbiewiki_docs
 
 import (
-	"task-manager/src/wiki_elastic"
+	nw_elastic "task-manager/src/newbiewiki_elastic"
 	"strings"
 	"encoding/json"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
@@ -31,7 +31,7 @@ func getHandler(ctx *gin.Context) {
 		Index : "documents",
 		DocumentID : target,
 	}
-	wiki_elastic.Get(req)
+	nw_elastic.Get(req)
 }
 func addHandler(ctx *gin.Context) {
 	var data Wiki_docs
@@ -50,7 +50,7 @@ func addHandler(ctx *gin.Context) {
 		Refresh : "true",
 	}
 
-	wiki_elastic.Insert(req)
+	nw_elastic.Insert(req)
 }
 
 //
@@ -73,7 +73,7 @@ func updateHandler(ctx *gin.Context) {
 		DocumentID : target,
 		Body : jsonData,
 	}
-	wiki_elastic.Update(req)
+	nw_elastic.Update(req)
 }
 func deleteHandler(ctx *gin.Context) {
 	
@@ -84,7 +84,7 @@ func deleteHandler(ctx *gin.Context) {
 		DocumentID : target,
 		Refresh: "true",
 	}
-	wiki_elastic.Delete(req)
+	nw_elastic.Delete(req)
 }
 
 //title find, not contents
@@ -92,22 +92,19 @@ func findHandler(ctx *gin.Context) {
 	//query find in contents
 	query := ctx.Param("query")
 	
-	var QueryRequest wiki_elastic.MatchQuery
+	var QueryRequest nw_elastic.MatchQuery
 	QueryRequest.Query.Match.Title = query
 	jsonData := toJSON(QueryRequest)
 	req := esapi.SearchRequest{
 		Index : []string{"documents"},
 		Body : jsonData,
 	}
-	res := wiki_elastic.Find(req)
-	var resData wiki_elastic.HitsData
+	res := nw_elastic.Find(req)
+	var resData nw_elastic.HitsData
 	json.NewDecoder(res.Body).Decode(&resData)
 	ctx.JSON(200, resData.Hits["hits"])
 }
 
-type tstr struct {
-	Source interface{} `json:"_source"`
-}
 
 func toJSON(data interface{}) *strings.Reader {
 	myjson, err := json.Marshal(data)

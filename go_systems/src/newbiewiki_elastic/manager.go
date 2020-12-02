@@ -1,4 +1,4 @@
-package wiki_elastic
+package newbiewiki_elastic
 
 import (
 	"context"

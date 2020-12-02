@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Navbar from "./Components/Navbar";
 import MainPage from "./Components/MainPage";
-import useWS from "./Hooks/useWS";
 
 import "regenerator-runtime/runtime"; // to avoid async ans await error
 
@@ -10,7 +9,6 @@ interface Props {
   user?: string;
 }
 const App: React.FC<Props> = (props) => {
-  const ws = useWS();
   const [mainState, setMainState] = useState<boolean>(true);
   const [login, setLogin] = useState<boolean>(false);
   return (
