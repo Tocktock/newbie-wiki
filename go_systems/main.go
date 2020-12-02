@@ -2,6 +2,7 @@ package main
 
 import (
 	nw_elastic "task-manager/src/newbiewiki_elastic"
+	nw_middleware "task-manager/src/newbiewiki_middlewares"
 	"context"
 	"log"
 	"net/http"
@@ -33,6 +34,7 @@ var router *gin.Engine
 
 func main() {
 	router = gin.Default()
+	router.Use(nw_middleware.CORSMiddleware())
 	go initServer()
 
 	runServer()
