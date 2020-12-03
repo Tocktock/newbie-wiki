@@ -9,7 +9,9 @@ interface Props {
 const Menu: React.FC<Props> = (props) => {
   return (
     <div className="menu m-5 text-white">
-      <Link href={props.target}>{props.menuName}</Link>
+      <Link href={props.target}>
+        <a>{props.menuName}</a>
+      </Link>
     </div>
   );
 };

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import useDebounce from "../Hooks/useDebounce";
 import useSearchData from "../Hooks/useSearchData";
 import SearchResult from "./SearchResult";
 
 const Search: React.FC = (props) => {
   const [query, setQuery] = useState<string | undefined>();
-
-  const { result, isLoading } = useSearchData(query);
+  const debouncedQuery = useDebounce(query, 500);
+  const { result, isLoading } = useSearchData(debouncedQuery);
   return (
     <form action="" method="get" className="flex w-full relative m-auto">
       <div className="w-full">
@@ -14,10 +15,8 @@ const Search: React.FC = (props) => {
           className="rounded-lg w-full px-5 py-3 shadow-md border m-0"
           type="text"
           placeholder="Search"
-          value={query}
           onChange={(e) => {
             setQuery(e.target.value);
-            console.log(e.target.value);
           }}
         />
         <button className="text-gray-500 rounded-full border w-8 border-white absolute right-2 top-4">

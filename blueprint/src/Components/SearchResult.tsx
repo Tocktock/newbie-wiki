@@ -6,9 +6,8 @@ interface Props {
 }
 
 const SearchDropMenu: React.FC<Props> = ({ data }) => {
-  console.log(data);
   const result = Object.values(data).map((value) => (
-    <DropData header={value.title} content={value.contents} />
+    <DropData key={value._id} source={value._source} />
   ));
   return (
     <div className="absolute w-full top-100% left-0 right-auto">
