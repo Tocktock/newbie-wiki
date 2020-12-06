@@ -1,6 +1,4 @@
-import SignIn from "../src/Components/SignIn";
-import NavBar from "../src/Components/Navbar";
-import Link from "next/link";
+import SignIn from "../src/Components/Auth/SignIn";
 const SignInPage = () => {
   return (
     <>

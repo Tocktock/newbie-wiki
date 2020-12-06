@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import Navbar from "./Components/Navbar";
 import MainPage from "./Components/MainPage";
 
 import "regenerator-runtime/runtime"; // to avoid async ans await error

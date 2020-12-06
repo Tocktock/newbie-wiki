@@ -1,8 +1,7 @@
 import "../styles/index.css";
-import "../src/Components/Navbar";
 import Head from "next/head";
 import type { AppProps } from "next/app";
-import Navbar from "../src/Components/Navbar";
+import Navbar from "../src/Components/Main/Navbar";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           defer
         ></script>
       </Head>
-      <Navbar></Navbar>
+      <Navbar />
       <Component {...pageProps} />
     </>
   );

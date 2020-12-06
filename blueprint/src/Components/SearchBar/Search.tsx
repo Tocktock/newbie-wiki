@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import useDebounce from "../Hooks/useDebounce";
-import useSearchData from "../Hooks/useSearchData";
+import useDebounce from "../../Hooks/useDebounce";
+import useSearchData from "../../Hooks/useSearchData";
 import SearchResult from "./SearchResult";
 
 const Search: React.FC = (props) => {

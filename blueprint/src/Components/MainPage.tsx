@@ -1,6 +1,5 @@
 import React, { useState, InputHTMLAttributes } from "react";
-import Search from "./Search";
-import HelloContent from "./MainPage/HelloContent";
+import HelloContent from "./Main/HelloContent";
 
 const MainPage: React.FC = (props) => {
   return (

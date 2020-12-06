@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "./mixins/Menu";
+import Menu from "../mixins/Menu";
 import Link from "next/link";
 interface Props {
   mainState?: boolean;

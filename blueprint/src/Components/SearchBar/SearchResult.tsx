@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import DropData from "./mixins/DropData";
+import DropData from "./DropData";
 
 interface Props {
   data: Object;
 }
 
-const SearchDropMenu: React.FC<Props> = ({ data }) => {
-  const result = Object.values(data).map((value) => (
+const SearchDropMenu: React.FC<Props> = (props) => {
+  const result = Object.values(props.data).map((value) => (
     <DropData key={value._id} source={value._source} />
   ));
   return (
