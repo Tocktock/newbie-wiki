@@ -7,8 +7,15 @@ const Search: React.FC = (props) => {
   const [query, setQuery] = useState<string | undefined>();
   const debouncedQuery = useDebounce(query, 500);
   const { result, isLoading } = useSearchData(debouncedQuery);
+  const [focusOn, setFocusOn] = useState<Boolean>(false);
   return (
-    <form action="" method="get" className="flex w-full relative m-auto">
+    <form
+      action=""
+      method="get"
+      className="flex w-full relative m-auto"
+      onFocus={() => setFocusOn(true)}
+      onBlur={() => setFocusOn(false)}
+    >
       <div className="w-full">
         <input
           id="searchbox"
@@ -24,7 +31,7 @@ const Search: React.FC = (props) => {
         </button>
       </div>
       <div className="ds-dropdown-menu mt-2">
-        {result != undefined && (
+        {result != undefined && focusOn && (
           <div className="ds-dataset-1">
             <SearchResult data={result} />
           </div>

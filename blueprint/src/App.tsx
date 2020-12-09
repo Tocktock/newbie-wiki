@@ -7,6 +7,7 @@ interface Props {
   message?: string;
   user?: string;
 }
+
 const App: React.FC<Props> = (props) => {
   const [mainState, setMainState] = useState<boolean>(true);
   const [login, setLogin] = useState<boolean>(false);
