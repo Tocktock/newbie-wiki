@@ -8,6 +8,7 @@ const Search: React.FC = (props) => {
   const debouncedQuery = useDebounce(query, 500);
   const { result, isLoading } = useSearchData(debouncedQuery);
   const [focusOn, setFocusOn] = useState<Boolean>(false);
+
   return (
     <form
       action=""

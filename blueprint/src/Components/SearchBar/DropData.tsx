@@ -11,7 +11,7 @@ interface Source {
 
 const DropData: React.FC<Data> = (props) => {
   const [sideData, setSideData] = useState<string>("");
-  const hoverEvent = (e) => {
+  const hoverEvent = () => {
     setSideData(props.source.contents);
   };
   const mouseLeaveEvnet = () => {
@@ -24,7 +24,7 @@ const DropData: React.FC<Data> = (props) => {
       onMouseEnter={hoverEvent}
       onMouseLeave={mouseLeaveEvnet}
     >
-      <div className="p-3 dropdata w-full">
+      <div className="p-3 dropdata w-full cursor-pointer">
         <div className="dropdata__header border-b pb-2 mb-2">
           {props.source.title}
         </div>

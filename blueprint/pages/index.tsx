@@ -1,5 +1,5 @@
-import App from "../src/App";
+import MainPage from "../src/Components/MainPage";
 
 export default function IndexPage() {
-  return <App />;
+  return <MainPage />;
 }

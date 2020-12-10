@@ -1,7 +1,7 @@
 import "../styles/index.css";
 import Head from "next/head";
 import type { AppProps } from "next/app";
-import Navbar from "../src/Components/Main/Navbar";
+import Navbar from "../src/Components/Navbar/Navbar";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

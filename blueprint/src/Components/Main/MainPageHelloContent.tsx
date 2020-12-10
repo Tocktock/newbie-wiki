@@ -1,7 +1,6 @@
 import React from "react";
-import Search from "../SearchBar/Search";
 
-const HelloContent: React.FC = (props) => {
+const MainPageHelloContent: React.FC = (props) => {
   return (
     <div className="main__content flex flex-col justify-center items-center content-center max-w-screen-md">
       <a href="/">
@@ -10,11 +9,10 @@ const HelloContent: React.FC = (props) => {
         </span>
       </a>
       <span className="font-crimsonText italic text-2xl text-gray-600 font-semibold m-5">
-        For beginer, Want to Learn some !!
+        Search What Ever you Want!!
       </span>
-      <Search />
     </div>
   );
 };
 
-export default HelloContent;
+export default MainPageHelloContent;

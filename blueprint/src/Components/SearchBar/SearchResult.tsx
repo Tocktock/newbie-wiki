@@ -7,8 +7,6 @@ interface Props {
 }
 
 const SearchDropMenu: React.FC<Props> = (props) => {
-  const [resultFocusOut, setResultFocusOut] = useState<Boolean>(false);
-
   const result = Object.values(props.data).map((value) => (
     <DropData key={value._id} source={value._source} />
   ));
