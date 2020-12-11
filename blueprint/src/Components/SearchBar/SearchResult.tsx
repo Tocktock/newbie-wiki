@@ -3,7 +3,6 @@ import DropData from "./DropData";
 
 interface Props {
   data: Object;
-  isClickedBackground?: Boolean;
 }
 
 const SearchDropMenu: React.FC<Props> = (props) => {

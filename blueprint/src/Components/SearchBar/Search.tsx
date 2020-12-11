@@ -3,7 +3,9 @@ import useDebounce from "../../Hooks/useDebounce";
 import useSearchData from "../../Hooks/useSearchData";
 import SearchResult from "./SearchResult";
 
-const Search: React.FC = (props) => {
+interface Props {}
+
+const Search: React.FC<Props> = (props) => {
   const [query, setQuery] = useState<string | undefined>();
   const debouncedQuery = useDebounce(query, 500);
   const { result, isLoading } = useSearchData(debouncedQuery);
