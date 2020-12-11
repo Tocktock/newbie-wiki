@@ -1,5 +1,5 @@
 import React from "react";
-import SignUpForm from "./mixins/SignUpForm";
+import SignUpForm from "./SignUpForm";
 
 const SignUp: React.FC = (props) => {
   return (

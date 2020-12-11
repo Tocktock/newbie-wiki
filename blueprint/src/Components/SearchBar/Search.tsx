@@ -13,9 +13,7 @@ const Search: React.FC<Props> = (props) => {
 
   return (
     <form
-      action=""
-      method="get"
-      className="flex w-full relative m-auto"
+      className="flex w-full relative m-auto mt-5 transition duration-200"
       onFocus={() => setFocusOn(true)}
       onBlur={() => setFocusOn(false)}
     >

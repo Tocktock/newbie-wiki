@@ -1,9 +1,5 @@
-import React, {
-  useState,
-  InputHTMLAttributes,
-  createContext,
-  useCallback,
-} from "react";
+import React, { useState, createContext, useEffect, useRef } from "react";
+import { hasOnlyExpressionInitializer } from "typescript";
 import MainPageContent from "./Main/MainPageContent";
 import HelloContent from "./Main/MainPageHelloContent";
 import Search from "./SearchBar/Search";
@@ -23,15 +19,20 @@ export const MainPageContext = createContext<ContextAction>({
 });
 
 const MainPage: React.FC = (props) => {
-  const [docData, setDocData] = useState<DocData | null>({
-    title: t,
-    contents: c,
-  });
-  const setDocDataCallBack = (data) => {
+  const [docData, setDocData] = useState<DocData | null>(null);
+  const setDocDataCallBack = (data: DocData) => {
     setDocData(data);
-    console.log(data);
   };
-
+  const helloRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const { current } = helloRef;
+    if (docData != null) {
+      helloRef.current!.className = "opacity-0 transition duration-500";
+      setTimeout(() => {
+        helloRef.current!.className = "hidden";
+      }, 1500);
+    }
+  }, [docData]);
   const api = {
     setAction: setDocDataCallBack,
   };
@@ -39,9 +40,10 @@ const MainPage: React.FC = (props) => {
   return (
     <React.StrictMode>
       <div className="flex flex-col h-100vh w-100vw justify-center items-center content-center -mt-32">
-        <div>
+        <div ref={helloRef}>
           <HelloContent />
         </div>
+
         <MainPageContext.Provider value={api}>
           <div className="w-1/5">
             <Search />
