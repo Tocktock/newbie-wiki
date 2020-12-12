@@ -1,5 +1,9 @@
 import React from "react";
 
+interface Props {
+  shouldRemove: Boolean;
+}
+
 const MainPageHelloContent: React.FC = (props) => {
   return (
     <div className="main__content flex flex-col justify-center items-center content-center max-w-screen-md">

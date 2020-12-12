@@ -8,7 +8,7 @@ interface Props {
 
 const Navbar: React.FC<Props> = (props) => {
   return (
-    <div className="fixed top-1 z-50 h-20 w-full m-auto text-xl content-center justify-between items-center ">
+    <div className="fixed top-1 z-10 h-20 w-full m-auto text-xl content-center justify-between items-center ">
       <div className="text-blue-500 ml-5">
         <Link href="/">
           <a>Home</a>

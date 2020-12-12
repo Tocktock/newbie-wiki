@@ -13,7 +13,7 @@ const Search: React.FC<Props> = (props) => {
 
   return (
     <form
-      className="flex w-full relative m-auto mt-5 transition duration-200"
+      className="flex w-full relative"
       onFocus={() => setFocusOn(true)}
       onBlur={() => setFocusOn(false)}
     >
@@ -27,7 +27,7 @@ const Search: React.FC<Props> = (props) => {
             setQuery(e.target.value);
           }}
         />
-        <button className="text-gray-500 rounded-full border w-8 border-white absolute right-2 top-4">
+        <button className="text-gray-500 w-8 absolute right-2 top-4">
           <i aria-hidden className="fas fa-search"></i>
         </button>
       </div>
