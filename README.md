@@ -7,5 +7,5 @@
 # Stack
 
     NextJs, React, TailwindCSS
-    Go gin with gorillaWebsocket, MongoDB, Postgresql(not determine)
+    GoGin, ElasticSearch,MongoDB
     Nginx
